@@ -2,14 +2,14 @@
 
 `PSPUpdater` ist ein lokales PowerShell-Modul, das den Befehl `PSPU` bereitstellt.
 
-`PSPU` holt die aktuell verfuegbaren offiziellen PowerShell-Kanaele ab und startet auf Windows direkt die passende MSI-Installation. Standardauswahl ist `stable`, wenn du einfach nur Enter drueckst.
+`PSPU` holt die aktuell verfügbaren offiziellen PowerShell-Kanäle ab und startet auf Windows direkt die passende MSI-Installation. Standardauswahl ist `stable`, wenn du einfach nur Enter drueckst.
 
 Aktuell unterstuetzte Kanaltypen:
 
 - `stable`
 - `lts`
 - `daily`
-- aktuelle Vorabkanaele wie `rc`, `beta`, `alpha` oder `preview`, falls sie offiziell verfuegbar sind
+- aktuelle Vorabkanäle wie `rc`, `beta`, `alpha` oder `preview`, falls sie offiziell verfügbar sind
 
 ## Installation
 
@@ -19,7 +19,7 @@ Im Repo-Ordner:
 .\Install-PSPUpdater.ps1
 ```
 
-Danach kannst du direkt folgendes ausfuehren:
+Danach kannst du direkt folgendes ausführen:
 
 ```powershell
 PSPU
@@ -33,7 +33,7 @@ Interaktive Auswahl:
 PSPU
 ```
 
-Verfuegbare Kanaele nur auflisten:
+Verfügbare Kanäle nur auflisten:
 
 ```powershell
 PSPU -List
