@@ -3,16 +3,39 @@
 <details open>
 <summary>🇬🇧 English</summary>
 
-`PSPUpdater` is a local PowerShell module that provides the `PSPU` command.
+`PSPUpdater` is a local PowerShell module that adds the `PSPU` command.
 
-`PSPU` retrieves the currently available official PowerShell channels and, on Windows, directly starts the matching MSI installation. The default selection is `stable` if you simply press Enter.
+It checks the official PowerShell release feeds, shows the currently available channels and installs the selected Windows MSI package. If you start `PSPU` without arguments, it opens an interactive selection menu. Pressing Enter selects `stable`.
 
-Currently supported channel types:
+## What it does
+
+- detects the local processor architecture (`x64`, `x86` or `arm64`)
+- reads the current PowerShell release information from official Microsoft and GitHub sources
+- supports stable, LTS, daily and currently available preview channels
+- downloads the matching Windows MSI package
+- starts the MSI installer directly
+- shows locally installed `pwsh.exe` versions before installation
+- offers to remove older MSI-based PowerShell installations after a successful update
+
+## Supported channels
+
+`PSPU` can install the following channel types when they are officially available:
 
 - `stable`
 - `lts`
 - `daily`
-- current preview channels such as `rc`, `beta`, `alpha`, or `preview`, if they are officially available
+- preview channels such as `rc`, `beta`, `alpha` or `preview`
+
+Preview channels are detected dynamically from the official PowerShell releases. The `preview` and `prerelease` aliases point to the latest available preview stage when applicable.
+
+## Requirements
+
+- Windows
+- PowerShell 7.0 or newer
+- internet access
+- permission to run MSI installations
+
+If the shell is not already elevated, `PSPUpdater` starts the MSI installation through a UAC prompt.
 
 ## Installation
 
@@ -28,7 +51,13 @@ After that, you can run:
 PSPU
 ```
 
-## Examples
+If the module is already installed and you want to replace it, run:
+
+```powershell
+.\Install-PSPUpdater.ps1 -Force
+```
+
+## Usage
 
 Interactive selection:
 
@@ -50,7 +79,7 @@ PSPU rc
 PSPU daily
 ```
 
-Force reinstallation:
+Force reinstallation of an already installed version:
 
 ```powershell
 PSPU stable -Force
@@ -65,7 +94,7 @@ The module uses official sources:
 - `https://aka.ms/pwsh-buildinfo-daily`
 - `https://api.github.com/repos/PowerShell/PowerShell/releases`
 
-This means the version selection comes directly from the official PowerShell release feeds instead of hard-coded download links.
+Version selection comes from the official PowerShell release feeds. Download URLs are built from the release metadata instead of being hard-coded.
 
 </details>
 
@@ -74,30 +103,59 @@ This means the version selection comes directly from the official PowerShell rel
 
 `PSPUpdater` ist ein lokales PowerShell-Modul, das den Befehl `PSPU` bereitstellt.
 
-`PSPU` holt die aktuell verfügbaren offiziellen PowerShell-Kanäle ab und startet auf Windows direkt die passende MSI-Installation. Standardauswahl ist `stable`, wenn Du einfach nur Enter drückst.
+Das Modul liest die offiziellen PowerShell-Releasefeeds aus, zeigt die aktuell verfügbaren Kanäle an und installiert das passende Windows-MSI-Paket. Wenn Du `PSPU` ohne Argumente startest, öffnet sich eine interaktive Auswahl. Mit Enter wird `stable` ausgewählt.
 
-Aktuell unterstützte Kanaltypen:
+## Was das Modul macht
+
+- erkennt die lokale Prozessorarchitektur (`x64`, `x86` oder `arm64`)
+- liest aktuelle PowerShell-Releaseinformationen aus offiziellen Microsoft- und GitHub-Quellen
+- unterstützt Stable, LTS, Daily und aktuell verfügbare Preview-Kanäle
+- lädt das passende Windows-MSI-Paket herunter
+- startet die MSI-Installation direkt
+- zeigt vor der Installation lokal gefundene `pwsh.exe`-Versionen an
+- bietet nach einem erfolgreichen Update an, ältere MSI-basierte PowerShell-Installationen zu entfernen
+
+## Unterstützte Kanäle
+
+`PSPU` kann folgende Kanaltypen installieren, sofern sie offiziell verfügbar sind:
 
 - `stable`
 - `lts`
 - `daily`
-- aktuelle Vorabkanäle wie `rc`, `beta`, `alpha` oder `preview`, falls sie offiziell verfügbar sind
+- Preview-Kanäle wie `rc`, `beta`, `alpha` oder `preview`
+
+Preview-Kanäle werden dynamisch aus den offiziellen PowerShell-Releases erkannt. Die Aliasse `preview` und `prerelease` verweisen bei Bedarf auf die neueste verfügbare Preview-Stufe.
+
+## Voraussetzungen
+
+- Windows
+- PowerShell 7.0 oder neuer
+- Internetzugang
+- Berechtigung zum Ausführen von MSI-Installationen
+
+Wenn die Shell nicht bereits mit Administratorrechten läuft, startet `PSPUpdater` die MSI-Installation über eine UAC-Abfrage.
 
 ## Installation
 
-Im Repo-Ordner:
+Im Repository-Ordner:
 
 ```powershell
 .\Install-PSPUpdater.ps1
 ```
 
-Danach kannst Du direkt folgendes ausführen:
+Danach kannst Du ausführen:
 
 ```powershell
 PSPU
 ```
 
-## Beispiele
+Wenn das Modul bereits installiert ist und ersetzt werden soll, verwende:
+
+```powershell
+.\Install-PSPUpdater.ps1 -Force
+```
+
+## Verwendung
 
 Interaktive Auswahl:
 
@@ -111,7 +169,7 @@ Verfügbare Kanäle nur auflisten:
 PSPU -List
 ```
 
-Direkt einen Kanal installieren:
+Einen Kanal direkt installieren:
 
 ```powershell
 PSPU stable
@@ -119,7 +177,7 @@ PSPU rc
 PSPU daily
 ```
 
-Neuinstallation erzwingen:
+Neuinstallation einer bereits installierten Version erzwingen:
 
 ```powershell
 PSPU stable -Force
@@ -134,6 +192,6 @@ Das Modul nutzt offizielle Quellen:
 - `https://aka.ms/pwsh-buildinfo-daily`
 - `https://api.github.com/repos/PowerShell/PowerShell/releases`
 
-Damit kommt die Versionsauswahl direkt aus den offiziellen PowerShell-Releasefeeds statt aus hart codierten Downloadlinks.
+Die Versionsauswahl kommt aus den offiziellen PowerShell-Releasefeeds. Download-URLs werden aus den Release-Metadaten gebildet, statt fest im Code hinterlegt zu sein.
 
 </details>
